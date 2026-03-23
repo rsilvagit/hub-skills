@@ -15,8 +15,24 @@ hub-skills/
 │   ├── adapters/        # conversor OpenAI/Copilot
 │   └── sdk/             # helpers para criar skills
 ├── skills/              # skills instaladas
-│   ├── echo/
-│   └── http_request/
+│   ├── echo/            # utilitario
+│   ├── http_request/    # utilitario
+│   ├── json_transform/  # utilitario
+│   ├── base64_codec/    # utilitario
+│   ├── hash_gen/        # utilitario
+│   ├── jwt_decode/      # utilitario
+│   ├── timestamp_convert/ # utilitario
+│   ├── uuid_gen/        # utilitario
+│   ├── regex_test/      # utilitario
+│   ├── port_check/      # utilitario
+│   ├── code_metrics/    # code quality
+│   ├── code_smell/      # code quality
+│   ├── dead_code/       # code quality
+│   ├── naming_check/    # code quality
+│   ├── security_scan/   # code quality
+│   ├── diff_review/     # code quality
+│   ├── docstring_check/ # code quality
+│   └── import_analyzer/ # code quality
 └── pyproject.toml
 ```
 
@@ -154,7 +170,32 @@ A funcao pode ser `handler`, `run` ou `main`. Suporta funcoes sync e async.
 
 ## Skills incluidas
 
+### Utilitarios Backend
+
 | Skill | Descricao |
 |-------|-----------|
 | `echo` | Retorna o texto recebido |
 | `http_request` | Faz requisicoes HTTP (GET/POST/PUT/DELETE) |
+| `json_transform` | Pretty print, minify, query por dot-path, flatten JSON |
+| `base64_codec` | Encode/decode Base64 |
+| `hash_gen` | Gera hashes MD5, SHA1, SHA256, SHA512 |
+| `jwt_decode` | Decodifica JWT (header, payload, expiracao) |
+| `timestamp_convert` | Converte entre Unix timestamp e ISO 8601 |
+| `uuid_gen` | Gera UUIDs v4 ou valida existentes |
+| `regex_test` | Testa regex com matches, groups e named groups |
+| `port_check` | Verifica se porta esta aberta ou scan de portas |
+
+### Code Quality e Review
+
+| Skill | Descricao |
+|-------|-----------|
+| `code_metrics` | LOC, funcoes, classes, complexidade ciclomatica, media de linhas |
+| `code_smell` | Detecta funcoes longas, nesting profundo, muitos params, god class |
+| `dead_code` | Encontra imports e variaveis nao usados, codigo inalcancavel |
+| `naming_check` | Valida PEP 8 (snake_case, PascalCase, UPPER_CASE) com sugestoes |
+| `security_scan` | Detecta secrets hardcoded, SQL/command injection, eval, pickle |
+| `diff_review` | Analisa git diff com stats e flags de mudancas arriscadas |
+| `docstring_check` | Mede cobertura de docstrings em modulos, classes e funcoes |
+| `import_analyzer` | Classifica imports (stdlib/third-party/local), ordem PEP 8 |
+
+As skills de code quality aceitam `code` (string) ou `file_path` (caminho do arquivo) como input.
