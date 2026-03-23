@@ -1,0 +1,21 @@
+{
+  "name": "naming_check",
+  "description": "Check Python naming conventions (PEP 8): snake_case for functions/variables, PascalCase for classes, UPPER_CASE for constants",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string",
+        "description": "Python source code to check"
+      },
+      "file_path": {
+        "type": "string",
+        "description": "Path to a Python file (alternative to code)"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

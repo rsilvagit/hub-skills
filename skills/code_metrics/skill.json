@@ -1,0 +1,21 @@
+{
+  "name": "code_metrics",
+  "description": "Analyze Python code and return metrics: lines of code, functions, classes, avg function length, cyclomatic complexity",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string",
+        "description": "Python source code to analyze"
+      },
+      "file_path": {
+        "type": "string",
+        "description": "Path to a Python file to analyze (alternative to code)"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

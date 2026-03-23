@@ -1,0 +1,21 @@
+{
+  "name": "dead_code",
+  "description": "Find unused imports, unused variables, and unreachable code in Python source",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "code": {
+        "type": "string",
+        "description": "Python source code to analyze"
+      },
+      "file_path": {
+        "type": "string",
+        "description": "Path to a Python file (alternative to code)"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

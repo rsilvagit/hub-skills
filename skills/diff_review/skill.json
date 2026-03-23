@@ -1,0 +1,23 @@
+{
+  "name": "diff_review",
+  "description": "Parse and analyze a unified diff (git diff). Returns structured changes, stats, and flags large/risky changes.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "diff": {
+        "type": "string",
+        "description": "Unified diff text (git diff output)"
+      },
+      "max_additions_warning": {
+        "type": "integer",
+        "description": "Warn if a file has more additions than this (default: 100)",
+        "default": 100
+      }
+    },
+    "required": ["diff"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}
