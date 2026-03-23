@@ -1,0 +1,32 @@
+{
+  "name": "http_request",
+  "description": "Make an HTTP request to any URL and return the response",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "url": {
+        "type": "string",
+        "description": "The URL to request"
+      },
+      "method": {
+        "type": "string",
+        "description": "HTTP method (GET, POST, PUT, DELETE)",
+        "default": "GET"
+      },
+      "headers": {
+        "type": "object",
+        "description": "Optional HTTP headers",
+        "default": {}
+      },
+      "body": {
+        "type": "string",
+        "description": "Optional request body (for POST/PUT)"
+      }
+    },
+    "required": ["url"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

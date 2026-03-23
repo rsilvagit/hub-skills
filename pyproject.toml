@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agent-skill-hub"
+version = "0.1.0"
+description = "Runtime + MCP Server + Adapter for agent skills"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.0",
+]
+
+[project.scripts]
+agent-skill = "agent_skill_hub.cli.main:main"
+
+[tool.setuptools.packages.find]
+include = ["agent_skill_hub*"]
