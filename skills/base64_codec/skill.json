@@ -1,0 +1,23 @@
+{
+  "name": "base64_codec",
+  "description": "Encode or decode Base64 strings",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "encode or decode",
+        "default": "encode"
+      },
+      "text": {
+        "type": "string",
+        "description": "Text to encode or Base64 string to decode"
+      }
+    },
+    "required": ["text"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

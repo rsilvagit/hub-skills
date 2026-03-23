@@ -1,0 +1,23 @@
+{
+  "name": "hash_gen",
+  "description": "Generate hash digests (md5, sha1, sha256, sha512) from text",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "Text to hash"
+      },
+      "algorithm": {
+        "type": "string",
+        "description": "Hash algorithm: md5, sha1, sha256, sha512",
+        "default": "sha256"
+      }
+    },
+    "required": ["text"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

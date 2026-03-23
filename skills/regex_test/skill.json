@@ -1,0 +1,27 @@
+{
+  "name": "regex_test",
+  "description": "Test a regex pattern against a string. Returns matches, groups, and named groups.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "pattern": {
+        "type": "string",
+        "description": "The regex pattern"
+      },
+      "text": {
+        "type": "string",
+        "description": "The text to test against"
+      },
+      "flags": {
+        "type": "string",
+        "description": "Flags: i (ignorecase), m (multiline), s (dotall). Combine like 'im'",
+        "default": ""
+      }
+    },
+    "required": ["pattern", "text"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

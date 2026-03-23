@@ -1,0 +1,22 @@
+{
+  "name": "timestamp_convert",
+  "description": "Convert between Unix timestamps and ISO 8601 dates. Also returns current time.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "to_iso (unix -> ISO), to_unix (ISO -> unix), or now (current time)",
+        "default": "now"
+      },
+      "value": {
+        "type": "string",
+        "description": "Unix timestamp or ISO date string to convert"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

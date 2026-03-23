@@ -1,0 +1,26 @@
+{
+  "name": "json_transform",
+  "description": "Pretty print, minify, or query JSON data using dot-path notation (e.g. 'users.0.name')",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "description": "JSON string or object to transform"
+      },
+      "action": {
+        "type": "string",
+        "description": "Action: pretty, minify, query, keys, flatten",
+        "default": "pretty"
+      },
+      "path": {
+        "type": "string",
+        "description": "Dot-path to query (for action=query), e.g. 'users.0.name'"
+      }
+    },
+    "required": ["data"]
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

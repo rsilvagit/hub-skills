@@ -1,0 +1,32 @@
+{
+  "name": "port_check",
+  "description": "Check if a TCP port is open on a host, or list ports in use locally",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "check (test specific host:port) or scan (test range on host)",
+        "default": "check"
+      },
+      "host": {
+        "type": "string",
+        "description": "Hostname or IP to check",
+        "default": "localhost"
+      },
+      "port": {
+        "type": "integer",
+        "description": "Port number to check"
+      },
+      "ports": {
+        "type": "array",
+        "items": { "type": "integer" },
+        "description": "List of ports to scan (for action=scan)"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

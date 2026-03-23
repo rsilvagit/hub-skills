@@ -1,0 +1,27 @@
+{
+  "name": "uuid_gen",
+  "description": "Generate UUIDs (v4 random) or parse/validate existing UUIDs",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "generate (create new UUID) or validate (check if string is valid UUID)",
+        "default": "generate"
+      },
+      "count": {
+        "type": "integer",
+        "description": "Number of UUIDs to generate (max 50)",
+        "default": 1
+      },
+      "value": {
+        "type": "string",
+        "description": "UUID string to validate (for action=validate)"
+      }
+    }
+  },
+  "execution": {
+    "type": "python",
+    "entry": "handler.py"
+  }
+}

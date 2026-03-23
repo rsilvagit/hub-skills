@@ -11,8 +11,9 @@ hub-skills/
 ├── agent_skill_hub/
 │   ├── core/            # engine: types (Pydantic), loader, runner
 │   ├── mcp_server/      # servidor HTTP MCP (list_tools + call_tool)
-│   ├── cli/             # CLI: list, run, serve
+│   ├── cli/             # CLI: list, run, serve, setup, doctor
 │   ├── adapters/        # conversor OpenAI/Copilot
+│   ├── auto_config/     # discovery + configuracao automatica
 │   └── sdk/             # helpers para criar skills
 ├── skills/              # skills instaladas
 │   ├── echo/            # utilitario
@@ -36,12 +37,22 @@ hub-skills/
 └── pyproject.toml
 ```
 
-## Instalacao
+## Quick Start
 
 ```bash
-# Python >= 3.11
+# 1. Instalar (Python >= 3.11)
 pip install -e .
+
+# 2. Setup automatico (detecta e configura tudo)
+agent-skill setup
+
+# 3. Pronto! O servidor MCP inicia automaticamente com o Windows.
 ```
+
+O `setup` faz tudo sozinho:
+- Detecta agentes AI instalados (Cursor, Claude Desktop, VS Code, Windsurf)
+- Injeta a config MCP no arquivo certo de cada agente (preserva configs existentes)
+- Registra auto-start silencioso no Windows
 
 ## Uso
 
@@ -58,6 +69,17 @@ agent-skill run http_request '{"url": "https://httpbin.org/get"}'
 # Subir servidor MCP (default: porta 3100)
 agent-skill serve
 agent-skill serve --port 8080
+
+# Auto-configurar agentes AI
+agent-skill setup              # detecta + configura + auto-start
+agent-skill setup --no-startup # sem auto-start
+agent-skill setup --url        # usa modo URL em vez de command
+
+# Diagnostico
+agent-skill doctor             # verifica skills, agentes, servidor, startup
+
+# Remover auto-start
+agent-skill uninstall
 ```
 
 ### MCP Server
@@ -97,17 +119,6 @@ curl -X POST http://localhost:3100/mcp \
 ```
 
 **Health check:** `GET /health`
-
-### Adapter OpenAI/Copilot
-
-```python
-from agent_skill_hub.core import load_skills
-from agent_skill_hub.adapters import to_openai_tools
-
-skills = load_skills("./skills")
-tools = to_openai_tools(skills)
-# Retorna formato compativel com OpenAI function calling
-```
 
 ## Criando uma Skill
 
@@ -155,11 +166,43 @@ A funcao pode ser `handler`, `run` ou `main`. Suporta funcoes sync e async.
 | `python` | `entry` | Caminho do arquivo `.py` relativo a pasta da skill |
 | `http` | `endpoint` | URL do servico externo (POST com JSON) |
 
-## Integracao com Cursor
+## Integracao com Agentes AI
 
-1. Suba o servidor: `agent-skill serve`
-2. No Cursor, configure o MCP apontando para `http://localhost:3100/mcp`
-3. As skills aparecem como tools disponiveis
+### Setup automatico (recomendado)
+
+```bash
+agent-skill setup
+```
+
+Detecta e configura automaticamente: Cursor, Claude Desktop, VS Code (Copilot), Windsurf.
+
+### GitHub Copilot (VS Code)
+
+1. `agent-skill serve` (ou deixe no auto-start)
+2. Abra o Copilot Chat no VS Code (Ctrl+Shift+I)
+3. Mude para **Agent mode**
+4. As skills aparecem como tools disponiveis
+
+### Claude Desktop
+
+1. `agent-skill serve`
+2. Abra o Claude Desktop — as tools ja estao configuradas
+
+### Cursor
+
+1. `agent-skill serve`
+2. No Cursor, as tools MCP ja estao configuradas
+
+### Uso programatico (API OpenAI)
+
+```python
+from agent_skill_hub.core import load_skills
+from agent_skill_hub.adapters import to_openai_tools
+
+skills = load_skills("./skills")
+tools = to_openai_tools(skills)
+# Retorna formato compativel com OpenAI function calling
+```
 
 ## Seguranca
 
